@@ -89,6 +89,9 @@ public class Library {
 					outputClass.scannedBooks++;
 				}
 				currentJ += shipmentSpeed;
+				if (currentJ > bookList.size()) {
+					break;
+				}
 			}
 		}
 	}
@@ -105,6 +108,9 @@ public class Library {
 					result += book.value;
 				}
 				currentJ += shipmentSpeed;
+				if (currentJ > bookList.size()) {
+					break;
+				}
 			}
 			return result;
 		}

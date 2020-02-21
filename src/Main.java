@@ -15,7 +15,7 @@ public class Main {
 	public static ArrayList<Integer> pointsPerBook;
 
 	public static final int NEXT_LINE_VARIABLE = 20;
-	public static final String INPUT_FILE_NAME = "c_incunabula.txt";
+	public static final String INPUT_FILE_NAME = "f_libraries_of_the_world.txt";
 	public static final String OUTPUT_FILE_NAME = "Solution.txt";
 
 	public static void getDataFromFile() {
@@ -130,10 +130,11 @@ public class Main {
 			} else {
 				break;
 			}
-			if (currentDay >= daysForScanning) {
-				System.out.println("End of solution");
+			if (maxScore == 0) {
+				break;
 			}
 		}
+		System.out.println("End of solution");
 		return outputList;
 	}
 
