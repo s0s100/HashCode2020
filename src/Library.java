@@ -8,6 +8,7 @@ public class Library {
 	public long signupTime;
 	public long shipmentSpeed;
 	public boolean isUsed;
+	public int lastMaxScore;
 
 	public class BookPoint {
 		public int id;
@@ -27,6 +28,7 @@ public class Library {
 		id = idGenerator;
 		idGenerator++;
 
+		lastMaxScore = 0;
 		isUsed = false;
 		this.signupTime = signupTime;
 		this.shipmentSpeed = ShipmentSpeed;
@@ -112,6 +114,7 @@ public class Library {
 					break;
 				}
 			}
+			lastMaxScore = result;
 			return result;
 		}
 		return 0;

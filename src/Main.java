@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
 	public static int bookNum;
@@ -15,7 +17,7 @@ public class Main {
 	public static ArrayList<Integer> pointsPerBook;
 
 	public static final int NEXT_LINE_VARIABLE = 20;
-	public static final String INPUT_FILE_NAME = "f_libraries_of_the_world.txt";
+	public static final String INPUT_FILE_NAME = "d_tough_choices.txt";
 	public static final String OUTPUT_FILE_NAME = "Solution.txt";
 
 	public static void getDataFromFile() {
@@ -90,6 +92,21 @@ public class Main {
 		return printWriter;
 	}
 
+	public static void sortLibraries() {
+		Collections.sort(libraries, new Comparator<Library>() {
+			@Override
+			public int compare(Library lib1, Library lib2) {
+				if (lib1.lastMaxScore > lib2.lastMaxScore) {
+					return 1;
+				} else if (lib1.lastMaxScore == lib2.lastMaxScore) {
+					return 0;
+				}
+				return -1;
+			}
+
+		});
+	}
+
 	// Working with first solution
 	public static ArrayList<OutputClass> solutionOne(PrintWriter writer) {
 		// FindingSolution
@@ -103,7 +120,7 @@ public class Main {
 			Library maxSelectedLibrary = null;
 			for (int i = 0; i < libraryNum; i++) {
 				Library selectedLibrary = libraries.get(i);
-				if (!selectedLibrary.isUsed) {
+				if (!selectedLibrary.isUsed && selectedLibrary.lastMaxScore != 0) {
 					int result = selectedLibrary.calculateScore(currentDay);
 					output = "Library id: " + libraries.get(i).id + '\n';
 					output += "Final score: " + result + '\n';
@@ -115,6 +132,12 @@ public class Main {
 						maxScore = result;
 					}
 				}
+				//Take first not used piece
+			}
+			if (currentDay == 1) {
+				sortLibraries();
+			}else {
+				
 			}
 			if (selectedLabIndex != -1) {
 				maxSelectedLibrary = libraries.get(selectedLabIndex);
